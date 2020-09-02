@@ -5,7 +5,7 @@ class SightingSerializer
     end
 
     def to_serialized_json
-        @sighting.to_json(
+        options = {
         :include => {
           :bird => {
               :only => [:name, :species]
@@ -14,7 +14,9 @@ class SightingSerializer
               :only => [:latitude, :longitude]
             }
         }, 
-            :except => [:updated_at])
+            :except => [:updated_at],
+     }
+            @sighting.to_json(options)
     end
 
 end
